@@ -13,7 +13,7 @@ class ShopRegisterApp extends State<shopRegister> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.red.shade900, Colors.redAccent.shade400],
+              colors: [Colors.lightBlueAccent, Colors.blue.shade600],
               begin: Alignment.bottomRight,
               end: Alignment.topLeft,
             ),

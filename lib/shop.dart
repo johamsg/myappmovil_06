@@ -39,7 +39,7 @@ class ShopApp extends State<shop> {
           ElevatedButton(onPressed: () {}, child:
           Text('Entrar'),
             style: ElevatedButton.styleFrom(
-                primary: Colors.red[600],
+                primary: Colors.blue[600],
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(600))),
           ),
@@ -54,7 +54,7 @@ class ShopApp extends State<shop> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
-              colors: [Colors.red.shade900, Colors.redAccent.shade400],
+              colors: [Colors.lightBlueAccent, Colors.blue.shade600],
               begin: Alignment.bottomRight,
               end: Alignment.topLeft,
             ),

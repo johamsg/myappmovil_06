@@ -32,12 +32,10 @@ Widget build(BuildContext context) {
       home: Scaffold(
         //extendBodyBehindAppBar: true,
         appBar: AppBar(
-          //shape: OutlineInputBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(20))),
-          //backgroundColor: Colors.green[500],
           flexibleSpace: Container(
             decoration: BoxDecoration(
               gradient: LinearGradient(
-                colors: [Colors.red.shade900, Colors.redAccent.shade400],
+                colors: [Colors.lightBlueAccent, Colors.blue.shade600],
                 begin: Alignment.bottomRight,
                 end: Alignment.topLeft,
               ),
@@ -48,7 +46,6 @@ Widget build(BuildContext context) {
           centerTitle: true,
           toolbarHeight: 50,
           elevation: 20.00,
-          //shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(bottom: Radius.circular(16)),
           // ),
         ),
         body: SingleChildScrollView(
@@ -89,7 +86,7 @@ Widget build(BuildContext context) {
                   },
                   child: Text('Buscar'),
                     style: ElevatedButton.styleFrom(
-                        primary: Colors.red[600],
+                        primary: Colors.blue[600],
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(600))),
                 ),
@@ -105,7 +102,7 @@ Widget build(BuildContext context) {
                   },
                   child: Text('Listado de tiendas'),
                   style: ElevatedButton.styleFrom(
-                      primary: Colors.red[600],
+                      primary: Colors.blue[600],
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(600))),
 
@@ -134,7 +131,7 @@ Widget build(BuildContext context) {
             },
             child: Text('Registro de tiendas'),
             style: ElevatedButton.styleFrom(
-                primary: Colors.red[600],
+                primary: Colors.blue[600],
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(600))),
           ),
