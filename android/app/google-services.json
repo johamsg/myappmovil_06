@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "334458221117",
+    "project_id": "bdmovil06",
+    "storage_bucket": "bdmovil06.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:334458221117:android:390e5b1fb454a74a323054",
+        "android_client_info": {
+          "package_name": "com.ebosque.myappmovil_06"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "334458221117-tj5ralvprmd44qdu45cmqsi5lp8nhg17.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzQzZQiopPIduXfdrlCX-0apZDBuXx_p4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "334458221117-tj5ralvprmd44qdu45cmqsi5lp8nhg17.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
