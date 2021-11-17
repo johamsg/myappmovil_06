@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:myappmovil_06/shopView.dart';
+import 'shopView.dart';
 
 class shop extends StatefulWidget {
   @override
@@ -36,7 +38,11 @@ class ShopApp extends State<shop> {
             height: 80,
             child: Image.asset('image/comida_rapida.png'),
           ),
-          ElevatedButton(onPressed: () {}, child:
+          ElevatedButton(onPressed: () {
+            print("presionado");
+            Navigator.push(
+                context, MaterialPageRoute(builder: (_) => shopview()));
+          }, child:
           Text('Entrar'),
             style: ElevatedButton.styleFrom(
                 primary: Colors.blue[600],

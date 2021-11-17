@@ -71,7 +71,7 @@ Widget build(BuildContext context) {
                         borderRadius: BorderRadius.circular(600),
                       ),
                       //icon: Icon(Icons.search),
-                      labelText: 'búsqueda',
+                      labelText: 'Búsqueda',
                       hintText: 'Palabra clave de la búsqueda'),
                 ),
               ),
