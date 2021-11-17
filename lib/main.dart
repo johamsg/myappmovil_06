@@ -4,6 +4,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:myappmovil_06/buscar.dart';
 import 'shop.dart';
 import 'shopRegister.dart';
+import 'gestionUsuario.dart';
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,16 +18,16 @@ class MyApp extends StatelessWidget {
     return MaterialApp(debugShowCheckedModeBanner: false, home: Home());
   }
 }
+
 class Home extends StatefulWidget {
   @override
   HomeStart createState() => HomeStart();
-
 }
-@override
-class HomeStart extends State<Home>{
-  @override
-Widget build(BuildContext context) {
 
+@override
+class HomeStart extends State<Home> {
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'App',
       home: Scaffold(
@@ -77,7 +78,7 @@ Widget build(BuildContext context) {
               ),
               Padding(
                 padding:
-                EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
+                    EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
                 child: ElevatedButton(
                   onPressed: () {
                     print("presionado");
@@ -85,15 +86,15 @@ Widget build(BuildContext context) {
                         context, MaterialPageRoute(builder: (_) => buscar()));
                   },
                   child: Text('Buscar'),
-                    style: ElevatedButton.styleFrom(
-                        primary: Colors.blue[600],
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(600))),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blue[600],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(600))),
                 ),
               ),
               Padding(
                 padding:
-                EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
+                    EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
                 child: ElevatedButton(
                   onPressed: () {
                     //print("presionado");
@@ -106,7 +107,7 @@ Widget build(BuildContext context) {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(600))),
 
-             /*Builder(
+                  /*Builder(
                 builder: (context) => ElevatedButton(
                   //EdgeInsets.only(left: 0, top: 10, right: 0, bottom: 0),
                   onPressed: () {
@@ -120,22 +121,38 @@ Widget build(BuildContext context) {
                           borderRadius: BorderRadius.circular(600))),*/
                 ),
               ),
-        Padding(
-          padding:
-          EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
-          child: ElevatedButton(
-            onPressed: () {
-              //print("presionado");
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => shopRegister()));
-            },
-            child: Text('Registro de tiendas'),
-            style: ElevatedButton.styleFrom(
-                primary: Colors.blue[600],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(600))),
-          ),
-        ),
+              Padding(
+                padding:
+                    EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    //print("presionado");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => shopRegister()));
+                  },
+                  child: Text('Registar tienda'),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blue[600],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(600))),
+                ),
+              ),
+              Padding(
+                padding:
+                    EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    //print("presionado");
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (_) => gestionUsuario()));
+                  },
+                  child: Text('Gestión de usuario'),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blue[600],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(600))),
+                ),
+              ),
             ],
           ),
         ),
@@ -143,4 +160,3 @@ Widget build(BuildContext context) {
     );
   }
 }
-
