@@ -1,6 +1,6 @@
 # myappmovil_06
 
-aplicacion para desarrollo movil grupo 06
+aplicacion para desarrollo movil grupo 03
 
 ## Getting Started
 
