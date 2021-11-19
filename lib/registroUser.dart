@@ -47,7 +47,7 @@ class RegistroUserApp extends State<registroUser> {
         toolbarHeight: 50,
         elevation: 20.00,
       ),
-      body: Padding(
+      body: SingleChildScrollView(
         padding: const EdgeInsets.all(20),
         child: Column(
           children: [

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'registroUser.dart';
+import 'login.dart';
 
 class gestionUsuario extends StatefulWidget{
   @override
@@ -45,10 +46,12 @@ class GestionUsuarioApp extends State<gestionUsuario>{
             ),
             Padding(
               padding:
-              EdgeInsets.only(bottom:5, top: 5),
+              EdgeInsets.only(top:5, bottom:5),
               child: ElevatedButton(
-                onPressed: (){},
-                child: Text('Login'),
+                onPressed: (){
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => login()));
+                },
+                child:Text("Login"),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.blue[600],
                     shape: RoundedRectangleBorder(
