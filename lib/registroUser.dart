@@ -23,7 +23,8 @@ class RegistroUserApp extends State<registroUser> {
         'nombreUsuario':nombreUser.text,
         'correo':correo.text,
         'telefono':tele.text,
-        'password':pass.text
+        'password':pass.text,
+        'estado': true
       });
     }
     catch (e){

@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'buscar.dart';
-class login extends StatefulWidget {
+
+class cambioPass extends StatefulWidget{
   @override
-  LoginApp createState() => LoginApp();
+  CambioPassApp createState()=> CambioPassApp();
 }
 
-//
-class LoginApp extends State<login> {
-  TextEditingController correo = TextEditingController();
-  TextEditingController pass = TextEditingController();
-  //final firebase=FirebaseFirestore.instance;
+class CambioPassApp extends State<cambioPass> {
 
+  TextEditingController correo= TextEditingController();
+  TextEditingController passA= TextEditingController();
+  TextEditingController passN= TextEditingController();
+  final firebase=FirebaseFirestore.instance;
   validarDatos() async {
     try {
       CollectionReference ref =
@@ -20,25 +20,40 @@ class LoginApp extends State<login> {
 
       if (usuario.docs.length != 0) {
         //print("flag");
-        print(usuario.docs.length);
+        //print(usuario.docs.length);
         int flag = 0;
         for (var cursor in usuario.docs) {
-          print(cursor.get("correo")+ "||"+correo.text);
+          //print(cursor.get("Correo")+ "||"+correo.text);
 
-          if (cursor.get("correo") == correo.text) {
-            print(cursor.get("password"));
-            if (cursor.get("password") == pass.text) {
-              mensaje("Correcto","Usuario correcto");
-              print(cursor.get("nombreUsuario"));
+          if (cursor.get("Correo") == correo.text) {
+            //print(cursor.get("Password"));
+            if (cursor.get("Password") == passA.text) {
+              //mensaje("Correcto","Usuario correcto");
+              //print(cursor.get("nombreUsuario"));
               flag = 1;
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => buscar()));
+              print(cursor.id);
+              try{
+               await firebase
+                   .collection('Usuarios')
+                   .doc(cursor.id)
+                   .set({
+                 'nombreUsuario':cursor.get('nombreUsuario'),
+                 'correo':cursor.get('correo'),
+                 'telefono':cursor.get('telefono'),
+                 'password':passN.text,
+                 'estado':true
+               });
+              }catch(e){
+                print (e);
+              }
+              //Navigator.push(
+                  //context, MaterialPageRoute(builder: (_) => buscar()));
             }
           }
         }
-        print(flag);
+        //print(flag);
         if (flag == 0) {
-          mensaje("No encotrado","No se encontró el usuario");
+          //mensaje("No encotrado","No se encontró el usuario");
         }
       } else {
         print("No hay elementos en la colección ");
@@ -47,18 +62,16 @@ class LoginApp extends State<login> {
       print(e);
     }
   }
-
   @override
   Widget build(BuildContext context) {
-    ///++++++++++++++++++++++++++++
     return Scaffold(
       appBar: AppBar(
-        title: Text("Ingreso de clientes"),
+        title: Text("Cambio de contraseña"),
       ),
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(
+            /*Padding(
               padding: EdgeInsets.all(10),
               child: Center(
                 child: Container(
@@ -67,7 +80,7 @@ class LoginApp extends State<login> {
                   child: Image.asset('image/login.png'),
                 ),
               ),
-            ),
+            ),*/
             Padding(
               padding: EdgeInsets.only(left: 40, top: 30, right: 40, bottom: 5),
               child: TextField(
@@ -83,12 +96,26 @@ class LoginApp extends State<login> {
             Padding(
               padding: EdgeInsets.only(left: 40, top: 30, right: 40, bottom: 5),
               child: TextField(
-                controller: pass,
+                obscureText: true,
+                controller: passA,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  labelText: 'Contraseña',
-                  hintText: 'Digite su contraseña',
+                  labelText: 'Contraseña actual',
+                  hintText: 'Digite su contraseña actual',
+                ),
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.only(left: 40, top: 30, right: 40, bottom: 5),
+              child: TextField(
+                obscureText: true,
+                controller: passN,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(20)),
+                  labelText: 'Contraseña nueva',
+                  hintText: 'Digite su contraseña nueva',
                 ),
               ),
             ),
@@ -104,7 +131,7 @@ class LoginApp extends State<login> {
                   // correo.clear();
                   //pass.clear();
                 },
-                child: Text("Enviar"),
+                child: Text("Cambiar"),
 
               ),
             ),
@@ -114,23 +141,4 @@ class LoginApp extends State<login> {
     );
   }
 
-  void mensaje(String titulo, String mess) {
-    showDialog(
-        context: context,
-        builder: (buildcontext) {
-          return AlertDialog(
-            title: Text(titulo),
-            content: Text(mess),
-            actions: <Widget>[
-              RaisedButton(
-                onPressed: () {
-                  Navigator.of(context).pop();
-                },
-                child:
-                Text("Aceptar", style: TextStyle(color: Colors.blueGrey)),
-              )
-            ],
-          );
-        });
-  }
 }
