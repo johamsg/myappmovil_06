@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:myappmovil_06/modificarUsuario.dart';
 import 'registroUser.dart';
 import 'login.dart';
 import 'cambioPass.dart';
@@ -64,7 +65,10 @@ class GestionUsuarioApp extends State<gestionUsuario>{
               padding:
               EdgeInsets.only(bottom:5, top: 5),
               child: ElevatedButton(
-                onPressed: (){},
+                onPressed: (){
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (_) => modificarUsuario()));
+                },
                 child: Text('Modificar Usuario'),
                 style: ElevatedButton.styleFrom(
                     primary: Colors.blue[600],

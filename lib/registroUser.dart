@@ -88,6 +88,7 @@ class RegistroUserApp extends State<registroUser> {
             Padding(
               padding: EdgeInsets.only(left: 15, right: 20, top: 10, bottom: 0),
               child: TextField(
+                obscureText: true,
                 controller: pass,
                 decoration: InputDecoration(
                     labelText: 'Contraseña',

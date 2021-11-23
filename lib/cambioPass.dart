@@ -25,9 +25,9 @@ class CambioPassApp extends State<cambioPass> {
         for (var cursor in usuario.docs) {
           //print(cursor.get("Correo")+ "||"+correo.text);
 
-          if (cursor.get("Correo") == correo.text) {
+          if (cursor.get("correo") == correo.text) {
             //print(cursor.get("Password"));
-            if (cursor.get("Password") == passA.text) {
+            if (cursor.get("password") == passA.text) {
               //mensaje("Correcto","Usuario correcto");
               //print(cursor.get("nombreUsuario"));
               flag = 1;
@@ -128,8 +128,9 @@ class CambioPassApp extends State<cambioPass> {
                         borderRadius: BorderRadius.circular(600))),
                 onPressed: () {
                   validarDatos();
-                  // correo.clear();
-                  //pass.clear();
+                   //correo.clear();
+                   //passA.clear();
+                  //passN.clear();
                 },
                 child: Text("Cambiar"),
 
