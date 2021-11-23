@@ -66,6 +66,15 @@ class CambioPassApp extends State<cambioPass> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.lightBlueAccent, Colors.blue.shade600],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
         title: Text("Cambio de contraseña"),
       ),
       body: SingleChildScrollView(

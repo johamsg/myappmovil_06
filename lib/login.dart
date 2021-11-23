@@ -53,6 +53,15 @@ class LoginApp extends State<login> {
     ///++++++++++++++++++++++++++++
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.lightBlueAccent, Colors.blue.shade600],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
         title: Text("Ingreso de clientes"),
       ),
       body: SingleChildScrollView(

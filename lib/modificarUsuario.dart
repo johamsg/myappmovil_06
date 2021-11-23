@@ -67,6 +67,15 @@ class ModificarUsuarioApp extends State<modificarUsuario> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        flexibleSpace: Container(
+          decoration: BoxDecoration(
+            gradient: LinearGradient(
+              colors: [Colors.lightBlueAccent, Colors.blue.shade600],
+              begin: Alignment.bottomRight,
+              end: Alignment.topLeft,
+            ),
+          ),
+        ),
         title: Text("Modificación de Usuario"),
       ),
       body: SingleChildScrollView(
