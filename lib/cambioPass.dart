@@ -103,7 +103,7 @@ class CambioPassApp extends State<cambioPass> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 40, top: 30, right: 40, bottom: 5),
+              padding: EdgeInsets.only(left: 40, top: 10, right: 40, bottom: 5),
               child: TextField(
                 obscureText: true,
                 controller: passA,
@@ -116,7 +116,7 @@ class CambioPassApp extends State<cambioPass> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 40, top: 30, right: 40, bottom: 5),
+              padding: EdgeInsets.only(left: 40, top: 10, right: 40, bottom: 5),
               child: TextField(
                 obscureText: true,
                 controller: passN,
@@ -129,9 +129,9 @@ class CambioPassApp extends State<cambioPass> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 40, top: 30, right: 5, bottom: 5),
+              padding: EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(minimumSize: Size(100, 50),
+                style: ElevatedButton.styleFrom(
                     primary: Colors.blue[600],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(600))),

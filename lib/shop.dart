@@ -10,50 +10,6 @@ class shop extends StatefulWidget {
 
 class ShopApp extends State<shop> {
   Widget build(BuildContext context) {
-    Widget titleSection = Container(
-      padding: const EdgeInsets.all(10),
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text('Comidas Rapidas El Gordo',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                      )),
-                ),
-                Text(
-                  'Perros Calientes, Hambuguesas y mas...',
-                  style: TextStyle(
-                    color: Colors.black54,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            width: 80,
-            height: 80,
-            child: Image.asset('image/comida_rapida.png'),
-          ),
-          ElevatedButton(onPressed: () {
-            print("presionado");
-            Navigator.push(
-                context, MaterialPageRoute(builder: (_) => shopview()));
-          }, child:
-          Text('Entrar'),
-            style: ElevatedButton.styleFrom(
-                primary: Colors.blue[600],
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(600))),
-          ),
-        ],
-      ),
-    );
-
 
 
     return Scaffold(
@@ -68,21 +24,22 @@ class ShopApp extends State<shop> {
           ),
         ),
         title: Text('Lista de Tiendas'),
-        titleSpacing: 0.0,
+        /*titleSpacing: 0.0,
         centerTitle: true,
         toolbarHeight: 50,
-        elevation: 20.00,
-
+        elevation: 20.00,*/
       ),
-      body: new Container(
+      body: Container(
         child: Center(
           child: StreamBuilder(
-            stream: FirebaseFirestore.instance.collection('Tiendas').snapshots(),
-            builder: (BuildContext context,AsyncSnapshot<QuerySnapshot> snapshot){
+            stream:
+                FirebaseFirestore.instance.collection('Tiendas').snapshots(),
+            builder:
+                (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
               if (!snapshot.hasData) return CircularProgressIndicator();
               return ListView.builder(
                 itemCount: snapshot.data!.docs.length,
-                itemBuilder: (BuildContext context, int index){
+                itemBuilder: (BuildContext context, int index) {
                   return new Card(
                     child: new Column(
                       children: <Widget>[
@@ -90,31 +47,39 @@ class ShopApp extends State<shop> {
                           padding: const EdgeInsets.all(15),
                           child: Row(
                             children: [
-                              Expanded(child: Column(
-                                crossAxisAlignment:
-                                CrossAxisAlignment.start,
+                              Expanded(
+                                  child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Container(
-                                    padding: 
-                                    const EdgeInsets.only(bottom:10),
-                                    child: Text(snapshot.data!.docs[index].get('nombreTienda')),
+                                    padding: const EdgeInsets.only(bottom: 10),
+                                    child: Text(snapshot.data!.docs[index]
+                                        .get('nombreTienda')),
                                   ),
-                                  Text(snapshot.data!.docs[index].get("descrip")
-                                    ,
+                                  Text(
+                                    snapshot.data!.docs[index].get("descrip"),
                                     style: TextStyle(
-                                      color: Colors.green[500],
+                                      color: Colors.black54,
                                     ),
                                   ),
-
                                 ],
                               )),
                               Container(
                                 width: 80,
                                 height: 80,
-                                child: Image.asset('image/'+snapshot.data!.docs[index].get("ruta")),
+                                child: Image.asset('image/' +
+                                    snapshot.data!.docs[index].get("ruta")),
                               ),
-                              ElevatedButton(onPressed: (){}, child: Text('Entrar'))
-                            ]
+                              ElevatedButton(
+                                onPressed: () {},
+                                child: Text('Entrar'),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.blue[600],
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(600))),
+                              ),
+                            ],
                           ),
                         )
                       ],

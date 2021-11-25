@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'buscar.dart';
+import '../buscar.dart';
 class login extends StatefulWidget {
   @override
   LoginApp createState() => LoginApp();
@@ -31,8 +31,8 @@ class LoginApp extends State<login> {
               mensaje("Correcto","Usuario correcto");
               print(cursor.get("nombreUsuario"));
               flag = 1;
-              Navigator.push(
-                  context, MaterialPageRoute(builder: (_) => buscar()));
+              /*Navigator.push(
+                  context, MaterialPageRoute(builder: (_) => buscar()));*/
             }
           }
         }
@@ -68,7 +68,7 @@ class LoginApp extends State<login> {
         child: Column(
           children: [
             Padding(
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.only(left: 10, right:10, top: 40, bottom: 10),
               child: Center(
                 child: Container(
                   width: 100,
@@ -90,7 +90,7 @@ class LoginApp extends State<login> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 40, top: 30, right: 40, bottom: 5),
+              padding: EdgeInsets.only(left: 40, top: 10, right: 40, bottom: 5),
               child: TextField(
                 controller: pass,
                 decoration: InputDecoration(
@@ -102,9 +102,9 @@ class LoginApp extends State<login> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 40, top: 30, right: 5, bottom: 5),
+              padding: EdgeInsets.only(left: 20, top: 10, right: 20, bottom: 5),
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(minimumSize: Size(100, 50),
+                style: ElevatedButton.styleFrom(
                     primary: Colors.blue[600],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(600))),

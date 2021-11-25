@@ -31,17 +31,18 @@ class GestionUsuarioApp extends State<gestionUsuario>{
       body: SingleChildScrollView(
         padding: EdgeInsets.all(20),
         child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
+            //crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Padding(
                 padding:
-                EdgeInsets.only(bottom:5, top: 5, right: 70),
+                EdgeInsets.only(bottom:20, top: 20, right: 50, left: 50),
               child: ElevatedButton(
                 onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (_)=> registroUser()));
                 },
                 child: Text('Registro de Usuario'),
                 style: ElevatedButton.styleFrom(
+                    minimumSize: Size(400,45),
                     primary: Colors.blue[600],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(600))),
@@ -49,13 +50,14 @@ class GestionUsuarioApp extends State<gestionUsuario>{
             ),
             Padding(
               padding:
-              EdgeInsets.only(top:5, bottom:5),
+              EdgeInsets.only(top:10, bottom:20, right: 50, left: 50),
               child: ElevatedButton(
                 onPressed: (){
                   Navigator.push(context, MaterialPageRoute(builder: (_) => login()));
                 },
                 child:Text("Login"),
                 style: ElevatedButton.styleFrom(
+                    minimumSize: Size(400,45),
                     primary: Colors.blue[600],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(600))),
@@ -63,7 +65,7 @@ class GestionUsuarioApp extends State<gestionUsuario>{
             ),
             Padding(
               padding:
-              EdgeInsets.only(bottom:5, top: 5),
+              EdgeInsets.only(bottom:20, top: 10, right: 50, left: 50),
               child: ElevatedButton(
                 onPressed: (){
                   Navigator.push(
@@ -71,6 +73,7 @@ class GestionUsuarioApp extends State<gestionUsuario>{
                 },
                 child: Text('Modificar Usuario'),
                 style: ElevatedButton.styleFrom(
+                    minimumSize: Size(400,45),
                     primary: Colors.blue[600],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(600))),
@@ -78,7 +81,7 @@ class GestionUsuarioApp extends State<gestionUsuario>{
             ),
             Padding(
               padding:
-              EdgeInsets.only(bottom:5, top: 5),
+              EdgeInsets.only(bottom:20, top: 10, right: 50, left: 50),
               child: ElevatedButton(
                 onPressed: (){
                   Navigator.push(
@@ -86,6 +89,7 @@ class GestionUsuarioApp extends State<gestionUsuario>{
                 },
                 child: Text('Cambio de Contraseña'),
                 style: ElevatedButton.styleFrom(
+                    minimumSize: Size(400,45),
                     primary: Colors.blue[600],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(600))),
@@ -93,7 +97,7 @@ class GestionUsuarioApp extends State<gestionUsuario>{
             ),
             Padding(
               padding:
-              EdgeInsets.only(bottom:5, top: 5),
+              EdgeInsets.only(bottom:20, top: 10, right: 50, left: 50),
               child: ElevatedButton(
                 onPressed: (){
                   // Navigator.push(
@@ -102,6 +106,7 @@ class GestionUsuarioApp extends State<gestionUsuario>{
                 },
                 child: Text('Dar de baja'),
                 style: ElevatedButton.styleFrom(
+                    minimumSize: Size(400,45),
                     primary: Colors.blue[600],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(600))),
@@ -121,9 +126,8 @@ class GestionUsuarioApp extends State<gestionUsuario>{
             content: Text(mess),
             actions: <Widget>[
               Padding(
-                padding: EdgeInsets.only(left: 40, top: 30, right: 5, bottom: 5),
+                padding: EdgeInsets.only(left: 40, top: 10, right: 5, bottom: 5),
                 child: TextField(
-                  // controller: correo,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)),
@@ -133,9 +137,8 @@ class GestionUsuarioApp extends State<gestionUsuario>{
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(left: 40, top: 30, right: 5, bottom: 5),
+                padding: EdgeInsets.only(left: 40, top: 10, right: 5, bottom: 5),
                 child: TextField(
-                  // controller: correo,
                   decoration: InputDecoration(
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(20)),

@@ -9,10 +9,14 @@ class modificarUsuario extends StatefulWidget{
 class ModificarUsuarioApp extends State<modificarUsuario> {
 
   TextEditingController correo= TextEditingController();
-  TextEditingController nombreUsuario= TextEditingController();
-  TextEditingController pass= TextEditingController();
-  TextEditingController tel= TextEditingController();
+  TextEditingController nombre= TextEditingController();
+  TextEditingController telefono= TextEditingController();
+  TextEditingController direccion= TextEditingController();
   final firebase=FirebaseFirestore.instance;
+  String correo1 ="";
+  String idDoc="";
+  String pass="";
+  bool estado=true;
   validarDatos() async {
     try {
       CollectionReference ref =
@@ -24,37 +28,15 @@ class ModificarUsuarioApp extends State<modificarUsuario> {
         //print(usuario.docs.length);
         int flag = 0;
         for (var cursor in usuario.docs) {
-          //print(cursor.get("Correo")+ "||"+correo.text);
-
           if (cursor.get("correo") == correo.text) {
-            //print(cursor.get("Password"));
-            if (cursor.get("password") == pass.text) {
-              //mensaje("Correcto","Usuario correcto");
-              //print(cursor.get("nombreUsuario"));
-              flag = 1;
-              print(cursor.id);
-              try{
-                await firebase
-                    .collection('Usuarios')
-                    .doc(cursor.id)
-                    .set({
-                  'nombreUsuario':nombreUsuario.text,
-                  'correo':correo.text,
-                  'telefono':tel.text,
-                  'password':cursor.get('password'),
-                  'estado':true
-                });
-              }catch(e){
-                print (e);
-              }
-              //Navigator.push(
-              //context, MaterialPageRoute(builder: (_) => buscar()));
-            }
+            nombre.text=cursor.get("nombreUsuario");
+            telefono.text=cursor.get("telefono");
+            direccion.text=cursor.get("direccion");
+            this.idDoc=cursor.id;
+            this.correo1=cursor.get("correo");
+            this.pass=cursor.get("password");
+
           }
-        }
-        //print(flag);
-        if (flag == 0) {
-          //mensaje("No encotrado","No se encontró el usuario");
         }
       } else {
         print("No hay elementos en la colección ");
@@ -63,6 +45,26 @@ class ModificarUsuarioApp extends State<modificarUsuario> {
       print(e);
     }
   }
+
+  modificarDatos() async{
+    try{
+      await firebase
+          .collection("Usuarios")
+          .doc(idDoc)
+          .set({
+        "nombreUsuario":nombre.text,
+        "Correo":this.correo1,
+        "Telefono":telefono.text,
+        "Password":pass,
+        "Direccion":direccion.text,
+        "Estado":estado
+      });
+    }
+    catch (e){
+      print(e);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -104,23 +106,37 @@ class ModificarUsuarioApp extends State<modificarUsuario> {
               ),
             ),
             Padding(
+                padding:
+                EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 0),
+                child: ElevatedButton(
+                  onPressed: () {
+                    validarDatos();
+
+                  },
+                  child: Text("Buscar Usuario"),
+                  style: ElevatedButton.styleFrom(
+                      primary: Colors.blue[600],
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(600))),
+                )),
+            Padding(
               padding: EdgeInsets.only(left: 40, top: 30, right: 40, bottom: 5),
               child: TextField(
                 obscureText: true,
-                controller: pass,
+                controller: nombre,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  labelText: 'Contraseña',
-                  hintText: 'Digite la Contraseña Actual',
+                  labelText: 'Nombre',
+                  hintText: 'Digite el Nombre de Usuario ',
                 ),
               ),
             ),
 
             Padding(
-              padding: EdgeInsets.only(left: 40, top: 30, right: 40, bottom: 5),
+              padding: EdgeInsets.only(left: 40, top: 15, right: 40, bottom: 5),
               child: TextField(
-                controller: nombreUsuario,
+                controller: telefono,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20)),
@@ -130,21 +146,21 @@ class ModificarUsuarioApp extends State<modificarUsuario> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 40, top: 30, right: 40, bottom: 5),
+              padding: EdgeInsets.only(left: 40, top: 15, right: 40, bottom: 5),
               child: TextField(
-                controller: tel,
+                controller: direccion,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(
                       borderRadius: BorderRadius.circular(20)),
-                  labelText: 'Telefono',
-                  hintText: 'Digite el Telefono Nuevo',
+                  labelText: 'Dirección',
+                  hintText: 'Digite la Dirección',
                 ),
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 40, top: 30, right: 5, bottom: 5),
+              padding: EdgeInsets.only(left: 15, top: 10, right: 15, bottom: 5),
               child: ElevatedButton(
-                style: ElevatedButton.styleFrom(minimumSize: Size(100, 50),
+                style: ElevatedButton.styleFrom(
                     primary: Colors.blue[600],
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(600))),
@@ -153,7 +169,7 @@ class ModificarUsuarioApp extends State<modificarUsuario> {
                   // correo.clear();
                   //pass.clear();
                 },
-                child: Text("Cambiar"),
+                child: Text("Modificar"),
 
               ),
             ),

@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:myappmovil_06/buscar.dart';
+import 'package:myappmovil_06/gestionTiendas.dart';
 import 'shop.dart';
 import 'shopRegister.dart';
 import 'gestionUsuario.dart';
+import 'gestionTiendas.dart';
+import 'buscar.dart';
+
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,6 +31,7 @@ class Home extends StatefulWidget {
 
 @override
 class HomeStart extends State<Home> {
+  TextEditingController busqueda = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -83,7 +89,7 @@ class HomeStart extends State<Home> {
                   onPressed: () {
                     print("presionado");
                     Navigator.push(
-                        context, MaterialPageRoute(builder: (_) => buscar()));
+                        context, MaterialPageRoute(builder: (_) => buscar(busqueda.text)));
                   },
                   child: Text('Buscar'),
                   style: ElevatedButton.styleFrom(
@@ -92,7 +98,7 @@ class HomeStart extends State<Home> {
                           borderRadius: BorderRadius.circular(600))),
                 ),
               ),
-              Padding(
+             /* Padding(
                 padding:
                     EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
                 child: ElevatedButton(
@@ -120,7 +126,7 @@ class HomeStart extends State<Home> {
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(600))),*/
                 ),
-              ),
+              ),*/
               Padding(
                 padding:
                     EdgeInsets.only(left: 20, top: 20, right: 20, bottom: 0),
@@ -128,9 +134,9 @@ class HomeStart extends State<Home> {
                   onPressed: () {
                     //print("presionado");
                     Navigator.push(context,
-                        MaterialPageRoute(builder: (_) => shopRegister()));
+                        MaterialPageRoute(builder: (_) => gestionTiendas()));
                   },
-                  child: Text('Registar tienda'),
+                  child: Text('Gestionar Tienda'),
                   style: ElevatedButton.styleFrom(
                       primary: Colors.blue[600],
                       shape: RoundedRectangleBorder(
