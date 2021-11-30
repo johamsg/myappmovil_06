@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'shopView.dart';
 
 class buscar extends StatefulWidget {
   final String searchWord;
@@ -42,7 +43,8 @@ class BuscarApp extends State<buscar> {
                   if (snapshot.data!.docs[index]
                       .get("nombreTienda")
                       .toString()
-                      .contains(widget.searchWord)) {
+                      .toUpperCase()
+                      .contains(widget.searchWord.toUpperCase())) {
                     return new Card(
                       child: new Column(
                         children: <Widget>[
@@ -51,21 +53,23 @@ class BuscarApp extends State<buscar> {
                             child: Row(children: [
                               Expanded(
                                   child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Container(
-                                      padding:
+                                    crossAxisAlignment: CrossAxisAlignment
+                                        .start,
+                                    children: [
+                                      Container(
+                                          padding:
                                           const EdgeInsets.only(bottom: 10),
-                                      child: Text(snapshot.data!.docs[index]
-                                          .get("nombreTienda"))),
-                                  Text(
-                                    snapshot.data!.docs[index].get("descrip"),
-                                    style: TextStyle(
-                                      color: Colors.green[500],
-                                    ),
-                                  ),
-                                ],
-                              )),
+                                          child: Text(snapshot.data!.docs[index]
+                                              .get("nombreTienda"))),
+                                      Text(
+                                        snapshot.data!.docs[index].get(
+                                            "descrip"),
+                                        style: TextStyle(
+                                          color: Colors.green[500],
+                                        ),
+                                      ),
+                                    ],
+                                  )),
                               Container(
                                 width: 80,
                                 height: 80,
@@ -73,15 +77,20 @@ class BuscarApp extends State<buscar> {
                                     snapshot.data!.docs[index].get("ruta")),
                               ),
                               ElevatedButton(
-                                  onPressed: () {}, child: Text('Entrar'))
+                                  onPressed: () {
+                                    Navigator.push(context, MaterialPageRoute(
+                                        builder: (_) =>
+                                            shopView(snapshot.data!.docs[index]
+                                                .id)));
+                                  }, child: Text('Entrar'))
                             ]),
                           )
                         ],
                       ),
                     );
+                  } else {
+                    return new Card();
                   }
-                  return new Card();
-
                 },
               );
             },
@@ -90,4 +99,6 @@ class BuscarApp extends State<buscar> {
       ),
     );
   }
+
+
 }

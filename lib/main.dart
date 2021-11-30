@@ -53,7 +53,17 @@ class HomeStart extends State<Home> {
           centerTitle: true,
           toolbarHeight: 50,
           elevation: 20.00,
-          // ),
+            actions: [
+              FloatingActionButton(
+                onPressed: () {
+                  // Navigator.push(context,MaterialPageRoute(builder: (_) => ItemRegister(tiendaId.toString())));
+                },
+                tooltip: 'Agregar producto',
+                child: const Icon(Icons.shopping_cart),
+                //child: Text("add"),
+                backgroundColor: Colors.green,
+              )
+            ]
         ),
         body: SingleChildScrollView(
           child: Column(
