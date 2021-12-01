@@ -61,7 +61,7 @@ class HomeStart extends State<Home> {
                 tooltip: 'Agregar producto',
                 child: const Icon(Icons.shopping_cart),
                 //child: Text("add"),
-                backgroundColor: Colors.green,
+                backgroundColor: Colors.indigo,
               )
             ]
         ),

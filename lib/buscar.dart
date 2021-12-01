@@ -53,23 +53,21 @@ class BuscarApp extends State<buscar> {
                             child: Row(children: [
                               Expanded(
                                   child: Column(
-                                    crossAxisAlignment: CrossAxisAlignment
-                                        .start,
-                                    children: [
-                                      Container(
-                                          padding:
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Container(
+                                      padding:
                                           const EdgeInsets.only(bottom: 10),
-                                          child: Text(snapshot.data!.docs[index]
-                                              .get("nombreTienda"))),
-                                      Text(
-                                        snapshot.data!.docs[index].get(
-                                            "descrip"),
-                                        style: TextStyle(
-                                          color: Colors.green[500],
-                                        ),
-                                      ),
-                                    ],
-                                  )),
+                                      child: Text(snapshot.data!.docs[index]
+                                          .get("nombreTienda"))),
+                                  Text(
+                                    snapshot.data!.docs[index].get("descrip"),
+                                    style: TextStyle(
+                                      color: Colors.black38,
+                                    ),
+                                  ),
+                                ],
+                              )),
                               Container(
                                 width: 80,
                                 height: 80,
@@ -77,12 +75,20 @@ class BuscarApp extends State<buscar> {
                                     snapshot.data!.docs[index].get("ruta")),
                               ),
                               ElevatedButton(
-                                  onPressed: () {
-                                    Navigator.push(context, MaterialPageRoute(
-                                        builder: (_) =>
-                                            shopView(snapshot.data!.docs[index]
-                                                .id)));
-                                  }, child: Text('Entrar'))
+                                onPressed: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (_) => shopView(
+                                              snapshot.data!.docs[index].id)));
+                                },
+                                child: Text('Entrar'),
+                                style: ElevatedButton.styleFrom(
+                                    primary: Colors.blue[600],
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(600))),
+                              )
                             ]),
                           )
                         ],
@@ -99,6 +105,4 @@ class BuscarApp extends State<buscar> {
       ),
     );
   }
-
-
 }

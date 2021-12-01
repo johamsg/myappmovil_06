@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'itemRegister.dart';
+import 'package:myappmovil_06/itemRegister.dart';
 
 
 class shopView extends StatefulWidget{
@@ -86,7 +87,7 @@ class shopViewApp extends State<shopView> {
                 Text(
                   this.descrCorta,
                   style: TextStyle(
-                    color: Colors.grey[500],
+                    color: Colors.black38,
                   ),
                 ),
               ],
@@ -137,7 +138,7 @@ class shopViewApp extends State<shopView> {
               tooltip: 'Agregar producto',
               child: const Icon(Icons.add_box),
               //child: Text("add"),
-              backgroundColor: Colors.green,
+              backgroundColor: Colors.indigo,
             )
           ]),
           body: Column(
@@ -196,7 +197,7 @@ class shopViewApp extends State<shopView> {
                                                 snapshot.data!.docs[index]
                                                     .get("Descripcion"),
                                                 style: TextStyle(
-                                                  color: Colors.green[500],
+                                                  color: Colors.black38,
                                                 ),
                                               ),
                                             ],

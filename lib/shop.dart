@@ -59,7 +59,7 @@ class ShopApp extends State<shop> {
                                   Text(
                                     snapshot.data!.docs[index].get("descrip"),
                                     style: TextStyle(
-                                      color: Colors.black54,
+                                      color: Colors.black38,
                                     ),
                                   ),
                                 ],
