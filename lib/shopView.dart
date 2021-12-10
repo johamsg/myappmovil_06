@@ -1,31 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:myappmovil_06/login.dart';
 import 'itemRegister.dart';
 import 'package:myappmovil_06/itemRegister.dart';
+import 'package:myappmovil_06/token.dart';
+import 'tienda.dart';
 
-
-class shopView extends StatefulWidget{
-  final String DOC_ID;
-  shopView(this.DOC_ID);
+class shopView extends StatefulWidget {
+  final tienda objetoTienda;
+  shopView(this.objetoTienda);
   @override
-  shopViewApp createState()=> shopViewApp();
+  shopViewApp createState() => shopViewApp();
 }
 
 class shopViewApp extends State<shopView> {
-  shopViewApp(){
+  /*shopViewApp() {
     validarDatos();
   }
   String nombre = "default name";
   String descrCorta = "defalut short";
   String descrLarga = "default long";
   String logo = "logo.png";
-  String tiendaId = "";
-  final firebase=FirebaseFirestore.instance;
+  String tiendaId = "";*/
+  String idUser = "";
+  final firebase = FirebaseFirestore.instance;
 
-  validarDatos() async {
+  /*validarDatos() async {
     try {
       CollectionReference ref =
-      FirebaseFirestore.instance.collection("Tiendas");
+          FirebaseFirestore.instance.collection("Tiendas");
       QuerySnapshot usuario = await ref.get();
       if (usuario.docs.length != 0) {
         print(widget.DOC_ID.toString() + " prueba");
@@ -47,22 +50,19 @@ class shopViewApp extends State<shopView> {
       print(e);
     }
   }
-  registrarCarrito(String idTienda,String idUsuario,String idProducto) async{
-    try{
-      await firebase
-          .collection("Carrito")
-          .doc()
-          .set({
-        "UserId":idUsuario,
-        "ShopId":idTienda,
-        "ItemId":idProducto,
-
+*/
+  registrarCarrito(String idTienda, String idUsuario, String idProducto) async {
+    try {
+      await firebase.collection("Carrito").doc().set({
+        "UserId": idUsuario,
+        "ShopId": idTienda,
+        "ItemId": idProducto,
       });
-    }
-    catch (e){
+    } catch (e) {
       print(e);
     }
   }
+
   @override
   Widget build(BuildContext context) {
     Widget titleSection = Container(
@@ -78,14 +78,14 @@ class shopViewApp extends State<shopView> {
                 Container(
                   padding: const EdgeInsets.only(bottom: 8),
                   child: Text(
-                    this.nombre,
+                    widget.objetoTienda.nombre,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
                 Text(
-                  this.descrCorta,
+                  widget.objetoTienda.descripcion,
                   style: TextStyle(
                     color: Colors.black38,
                   ),
@@ -119,21 +119,21 @@ class shopViewApp extends State<shopView> {
     Widget textSection = Container(
       padding: const EdgeInsets.all(32),
       child: Text(
-        descrLarga,
+        widget.objetoTienda.descripcion,
         softWrap: true,
       ),
     );
 
     return MaterialApp(
-      title: this.nombre,
+      title:  widget.objetoTienda.nombre,
       home: Scaffold(
-          appBar: AppBar(title: Text(this.nombre), actions: [
+          appBar: AppBar(title: Text( widget.objetoTienda.nombre), actions: [
             FloatingActionButton(
               onPressed: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (_) => itemRegister(tiendaId.toString())));
+                        builder: (_) => itemRegister(widget.objetoTienda.idTienda)));
               },
               tooltip: 'Agregar producto',
               child: const Icon(Icons.add_box),
@@ -147,7 +147,7 @@ class shopViewApp extends State<shopView> {
                 child: ListView(
                   children: [
                     Image.asset(
-                      'image/' + logo,
+                      'image/' + widget.objetoTienda.imagen,
                       width: 600,
                       height: 240,
                       fit: BoxFit.cover,
@@ -168,13 +168,13 @@ class shopViewApp extends State<shopView> {
                     if (!snapshot.hasData) return CircularProgressIndicator();
                     return ListView.builder(
                       itemCount:
-                      snapshot.data!.docs.length, // define las iteraciones
+                          snapshot.data!.docs.length, // define las iteraciones
                       itemBuilder: (BuildContext context, int index) {
-                        print(snapshot.data!.docs[index].id +
+                        /*print(snapshot.data!.docs[index].id +
                             " - " +
-                            this.tiendaId);
+                            widget.objetoTienda.idTienda);*/
                         if (snapshot.data!.docs[index].get("TiendaId") ==
-                            this.tiendaId) {
+                            widget.objetoTienda.idTienda) {
                           return new Card(
                             child: new Column(
                               children: <Widget>[
@@ -184,24 +184,24 @@ class shopViewApp extends State<shopView> {
                                     children: [
                                       Expanded(
                                           child: Column(
-                                            crossAxisAlignment:
+                                        crossAxisAlignment:
                                             CrossAxisAlignment.start,
-                                            children: [
-                                              Container(
-                                                  padding: const EdgeInsets.only(
-                                                      bottom: 10),
-                                                  child: Text(snapshot
-                                                      .data!.docs[index]
-                                                      .get("Nombre"))),
-                                              Text(
-                                                snapshot.data!.docs[index]
-                                                    .get("Descripcion"),
-                                                style: TextStyle(
-                                                  color: Colors.black38,
-                                                ),
-                                              ),
-                                            ],
-                                          )),
+                                        children: [
+                                          Container(
+                                              padding: const EdgeInsets.only(
+                                                  bottom: 10),
+                                              child: Text(snapshot
+                                                  .data!.docs[index]
+                                                  .get("Nombre"))),
+                                          Text(
+                                            snapshot.data!.docs[index]
+                                                .get("Descripcion"),
+                                            style: TextStyle(
+                                              color: Colors.black38,
+                                            ),
+                                          ),
+                                        ],
+                                      )),
                                       Container(
                                         width: 80,
                                         height: 80,
@@ -209,22 +209,29 @@ class shopViewApp extends State<shopView> {
                                             'image/' /*+snapshot.data!.docs[index].get("ruta")*/),
                                       ),
                                       FloatingActionButton(
-                                          onPressed:(){
-                                            registrarCarrito(this.tiendaId,"idUsario",(snapshot.data!.docs[index].id));
+                                          onPressed: () async {
+                                            token tk = new token();
+                                            String idUser = await tk.validarToken();
+                                            print(idUser);
+                                            if (idUser == "vacio") {
+                                              Navigator.push(
+                                                  context,
+                                                  MaterialPageRoute(
+                                                      builder: (_) => login()));
+                                            }
                                           },
-                                          child: const Icon(Icons.add_shopping_cart),
+                                          heroTag:null,
+                                          child: const Icon(
+                                              Icons.add_shopping_cart),
                                           backgroundColor: Colors.blueGrey,
-                                          tooltip:'Agregar al carrito'
-
-                                      ),
+                                          tooltip: 'Agregar al carrito'),
                                       FloatingActionButton(
-                                          onPressed:(){},
+                                          onPressed: () {},
                                           // child: const Icon(Icons.add_shopping_cart),
-                                          child:Text("Ver"),
+                                          child: Text("Ver"),
+                                          heroTag: null,
                                           backgroundColor: Colors.blue,
-                                          tooltip:'Agregar al carrito'
-
-                                      )
+                                          tooltip: 'Ver el producto')
                                     ],
                                   ),
                                 )
@@ -265,7 +272,7 @@ class shopViewApp extends State<shopView> {
     );
   }
 }
-  /*@override
+/*@override
   Widget build(BuildContext context) {
     Widget titleSection = Container(
       padding: const EdgeInsets.all(32),

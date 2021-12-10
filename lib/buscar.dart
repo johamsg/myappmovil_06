@@ -76,11 +76,11 @@ class BuscarApp extends State<buscar> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
-                                  Navigator.push(
+                                  /*Navigator.push(
                                       context,
                                       MaterialPageRoute(
                                           builder: (_) => shopView(
-                                              snapshot.data!.docs[index].id)));
+                                              snapshot.data!.docs[index].id)));*/
                                 },
                                 child: Text('Entrar'),
                                 style: ElevatedButton.styleFrom(

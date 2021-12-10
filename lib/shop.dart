@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:myappmovil_06/shopView.dart';
+import 'package:myappmovil_06/tienda.dart';
 import 'shopView.dart';
 
 class shop extends StatefulWidget {
@@ -9,6 +10,8 @@ class shop extends StatefulWidget {
 }
 
 class ShopApp extends State<shop> {
+  tienda tiendaObjeto=new tienda();
+
   Widget build(BuildContext context) {
 
 
@@ -71,7 +74,14 @@ class ShopApp extends State<shop> {
                                     snapshot.data!.docs[index].get("ruta")),
                               ),
                               ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  tiendaObjeto.idTienda=snapshot.data!.docs[index].id;
+                                  tiendaObjeto.nombre=snapshot.data!.docs[index].get("nombreTienda");
+                                  tiendaObjeto.descripcion=snapshot.data!.docs[index].get("descrip");
+                                  tiendaObjeto.imagen=snapshot.data!.docs[index].get("ruta");
+                                  tiendaObjeto.website=snapshot.data!.docs[index].get("webSite");
+                                  Navigator.push(context, MaterialPageRoute(builder: (_) => shopView(tiendaObjeto)));
+                                },
                                 child: Text('Entrar'),
                                 style: ElevatedButton.styleFrom(
                                     primary: Colors.blue[600],
