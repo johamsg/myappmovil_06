@@ -76,6 +76,13 @@ class BuscarApp extends State<buscar> {
                               ),
                               ElevatedButton(
                                 onPressed: () {
+                  /*tiendaObjeto.idTienda=snapshot.data!.docs[index].id;
+                  tiendaObjeto.nombre=snapshot.data!.docs[index].get("nombreTienda");
+                  tiendaObjeto.descripcion=snapshot.data!.docs[index].get("descrip");
+                  tiendaObjeto.imagen=snapshot.data!.docs[index].get("ruta");
+                  tiendaObjeto.website=snapshot.data!.docs[index].get("webSite");
+                  Navigator.push(context, MaterialPageRoute(builder: (_) => shopView(tiendaObjeto)));*/
+
                                   /*Navigator.push(
                                       context,
                                       MaterialPageRoute(

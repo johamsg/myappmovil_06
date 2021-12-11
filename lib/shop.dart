@@ -57,12 +57,18 @@ class ShopApp extends State<shop> {
                                   Container(
                                     padding: const EdgeInsets.only(bottom: 10),
                                     child: Text(snapshot.data!.docs[index]
-                                        .get('nombreTienda')),
+                                        .get('nombreTienda'),
+
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+
                                   ),
                                   Text(
                                     snapshot.data!.docs[index].get("descrip"),
                                     style: TextStyle(
-                                      color: Colors.black38,
+                                      color: Colors.indigo,
                                     ),
                                   ),
                                 ],

@@ -5,6 +5,8 @@ import 'itemRegister.dart';
 import 'package:myappmovil_06/itemRegister.dart';
 import 'package:myappmovil_06/token.dart';
 import 'tienda.dart';
+import 'shoppingCart.dart';
+import 'carrito.dart';
 
 class shopView extends StatefulWidget {
   final tienda objetoTienda;
@@ -51,12 +53,17 @@ class shopViewApp extends State<shopView> {
     }
   }
 */
-  registrarCarrito(String idTienda, String idUsuario, String idProducto) async {
+  registrarCarrito(carrito cart) async {
     try {
       await firebase.collection("Carrito").doc().set({
-        "UserId": idUsuario,
-        "ShopId": idTienda,
-        "ItemId": idProducto,
+        "UserId": cart.idUser,
+        'NombreTienda': cart.nombreTienda,
+        "ProductoId":cart.idItem,
+        "PrecioItem":cart.precioItem,
+        "NombreItem":cart.nombreItem,
+        "Descripcion":cart.descripocionItem,
+        "Cantidad":cart.cantidad,
+        "total":cart.total
       });
     } catch (e) {
       print(e);
@@ -87,7 +94,7 @@ class shopViewApp extends State<shopView> {
                 Text(
                   widget.objetoTienda.descripcion,
                   style: TextStyle(
-                    color: Colors.black38,
+                    color: Colors.indigo,
                   ),
                 ),
               ],
@@ -197,7 +204,7 @@ class shopViewApp extends State<shopView> {
                                             snapshot.data!.docs[index]
                                                 .get("Descripcion"),
                                             style: TextStyle(
-                                              color: Colors.black38,
+                                              color: Colors.indigo,
                                             ),
                                           ),
                                         ],
@@ -206,7 +213,7 @@ class shopViewApp extends State<shopView> {
                                         width: 80,
                                         height: 80,
                                         child: Image.asset(
-                                            'image/' /*+snapshot.data!.docs[index].get("ruta")*/),
+                                            'image/' +snapshot.data!.docs[index].get("ruta")),
                                       ),
                                       FloatingActionButton(
                                           onPressed: () async {
@@ -218,20 +225,32 @@ class shopViewApp extends State<shopView> {
                                                   context,
                                                   MaterialPageRoute(
                                                       builder: (_) => login()));
+                                            }else
+                                            {
+                                              carrito cart=new carrito();
+                                              cart.precioItem=snapshot.data!.docs[index].get("Precio");
+                                              cart.descripocionItem=snapshot.data!.docs[index].get("Descripcion");
+                                              cart.idItem=snapshot.data!.docs[index].id;
+                                              cart.idUser=idUser;
+                                              cart.nombreItem=snapshot.data!.docs[index].get("Nombre");
+                                              cart.nombreTienda=widget.objetoTienda.nombre;
+
+                                              mensaje("carrito", "¿Desea agregar al carrito? Digite la cantidad",cart);
+
                                             }
                                           },
                                           heroTag:null,
                                           child: const Icon(
                                               Icons.add_shopping_cart),
-                                          backgroundColor: Colors.blueGrey,
+                                          backgroundColor: Colors.indigo,
                                           tooltip: 'Agregar al carrito'),
-                                      FloatingActionButton(
+                                      /*FloatingActionButton(
                                           onPressed: () {},
                                           // child: const Icon(Icons.add_shopping_cart),
                                           child: Text("Ver"),
                                           heroTag: null,
                                           backgroundColor: Colors.blue,
-                                          tooltip: 'Ver el producto')
+                                          tooltip: 'Ver el producto')*/
                                     ],
                                   ),
                                 )
@@ -271,113 +290,51 @@ class shopViewApp extends State<shopView> {
       ],
     );
   }
-}
-/*@override
-  Widget build(BuildContext context) {
-    Widget titleSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: Row(
-        children: [
-          Expanded(
-            /*1*/
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                /*2*/
-                Container(
-                  padding: const EdgeInsets.only(bottom: 8),
-                  child: Text(
-                    'Comidas Rapidas El Gordo',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                    ),
+  void mensaje(String titulo, String mess, carrito cart) {
+    TextEditingController cant=TextEditingController();
+    cant.text="1";
+    showDialog(
+        context: context,
+        builder: (buildcontext) {
+          return AlertDialog(
+            title: Text(titulo),
+            content: Text(mess),
+            actions: <Widget>[
+              Padding(
+                padding: EdgeInsets.only(left: 40, top: 30, right: 5, bottom: 5),
+                child: TextField(
+                  controller: cant,
+                  decoration: InputDecoration(
+                    border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10)),
+                    labelText: 'Cantidad',
+                    hintText: 'Digite la cantidad',
                   ),
                 ),
-              ],
-            ),
-          ),
-          /*3*/
-          Icon(
-            Icons.star,
-            color: Colors.red[500],
-          ),
-          Text('41'),
-        ],
-      ),
-    );
-
-    Color color = Theme.of(context).primaryColor;
-
-    Widget buttonSection = Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          _buildButtonColumn(color, Icons.call, 'Llamar'),
-          _buildButtonColumn(color, Icons.near_me, 'Como Llegar'),
-          _buildButtonColumn(color, Icons.facebook, 'Facebook'),
-        ],
-      ),
-    );
-
-    Widget textSection = Container(
-      padding: const EdgeInsets.all(32),
-      child: Text(
-        'Productos:'
-        'Perros Calientes, Hamburguesas, Pizza, Arepas Rellenas...',
-        softWrap: true,
-      ),
-    );
-
-    return MaterialApp(
-      title: 'Comidas Rapidas El Gordo',
-      home: Scaffold(
-        appBar: AppBar(
-          flexibleSpace: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.lightBlueAccent, Colors.blue.shade600],
-                begin: Alignment.bottomRight,
-                end: Alignment.topLeft,
               ),
-            ),
-          ),
-          title: Text('Comidas Rapidas El Gordo'),
-        ),
-        body: ListView(
-          children: [
-            Image.asset(
-              'image/elgordo.jpg',
-              width: 600,
-              height: 300,
-              fit: BoxFit.cover,
-            ),
-            titleSection,
-            buttonSection,
-            textSection,
-          ],
-        ),
-      ),
-    );
+              RaisedButton(
+                onPressed: () {
+                  cart.cantidad=double.parse(cant.text);
+                  cart.total=cart.cantidad*cart.precioItem;
+                  registrarCarrito(cart);
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (_) => shoppingCart()));
+                },
+                child:
+                Text("Aceptar", style: TextStyle(color: Colors.blueGrey)),
+              ),
+              RaisedButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child:
+                Text("Cancelar", style: TextStyle(color: Colors.blueGrey)),
+              )
+            ],
+          );
+        });
   }
+}
 
-  Column _buildButtonColumn(Color color, IconData icon, String label) {
-    return Column(
-      mainAxisSize: MainAxisSize.min,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, color: color),
-        Container(
-          margin: const EdgeInsets.only(top: 8),
-          child: Text(
-            label,
-            style: TextStyle(
-              fontSize: 12,
-              fontWeight: FontWeight.w400,
-              color: color,
-            ),
-          ),
-        ),
-      ],
-    );
-  }
-}*/
