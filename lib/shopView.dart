@@ -218,7 +218,7 @@ class shopViewApp extends State<shopView> {
                                       FloatingActionButton(
                                           onPressed: () async {
                                             token tk = new token();
-                                            String idUser = await tk.validarToken();
+                                            String idUser = await tk.validarToken("");
                                             print(idUser);
                                             if (idUser == "vacio") {
                                               Navigator.push(
@@ -320,7 +320,7 @@ class shopViewApp extends State<shopView> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (_) => shoppingCart()));
+                          builder: (_) => shoppingCart(cart.idUser)));
                 },
                 child:
                 Text("Aceptar", style: TextStyle(color: Colors.blueGrey)),
